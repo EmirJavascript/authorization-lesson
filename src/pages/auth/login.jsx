@@ -15,7 +15,18 @@ export const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(form)
+    
+    fetch('http://localhost:2000/login', {
+      method: 'POST',
+      body: JSON.stringify(form),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then((data) => {
+        localStorage.setItem('token', data.token)
+      })
   }
 
   return (
